@@ -42,6 +42,59 @@ detach(part1Data)
 
 
 
+```{r}
+
+rm(list = ls())
+getwd()
+setwd("/Users/varadtupe/Documents/GitHub/CSE587_DIC/lab1/Part2")
+
+library(ggplot2)
+library(reshape2)
+#Influenza Positive Tests Reported to CDC by U.S. Clinical Laboratories 2017-2018 Season
+part1Data = read.csv('1_inf_pos_test.csv',header = T,sep = ',')
+part1Data$Week = as.factor(part1Data$Week)
+stack1Data = melt(part1Data[,1:3],id.vars = 'Week')
+plotS1 <- ggplot(stack1Data) 
+plotS1 +  geom_bar(aes(x=Week,y=value,factor=variable,fill=variable), stat="identity") + scale_fill_manual(values=c("#FFF450","#007E32")) +
+geom_line(data=part1Data, aes(group=1,x=part1Data$Week,y=700*part1Data$Percent.Positive.A),size=1,col="yellow",lwd=0.5,lty="dashed") +
+geom_line(data=part1Data, aes(group=1,x=part1Data$Week,y=700*part1Data$Percent.Positive.B.),size=0.4,col="green") +
+  geom_line(data=part1Data, aes(group=1,x=part1Data$Week,y=700*part1Data$X..Positive),size=0.4,col="black") +
+scale_y_continuous(breaks = round(seq(2000, 22000, by = 2000),1))+
+    scale_y_continuous(sec.axis = sec_axis(~.*0.0014, name = "Percent Positive",breaks = round(seq(2, 30, by = 2),1)))
+
+
+
+
+
+
+
+part1Data$Week = as.factor(part1Data$Week)
+stack1Data = melt(part1Data[,1:3],id.vars = 'Week')
+plotS1 <- ggplot(stack1Data) 
+plotS1 +  geom_bar(aes(x=Week,y=value,factor=variable,fill=variable), stat="identity",colour="black") + 
+  scale_fill_manual(values=c("#FFF450","#007E32")) +
+  geom_line(data=part1Data, aes(group=1,x=part1Data$Week,y=700*part1Data$Percent.Positive.A),size=1,col="yellow",lwd=0.5,lty="dashed") +
+  geom_line(data=part1Data, aes(group=1,x=part1Data$Week,y=700*part1Data$Percent.Positive.B),size=1,col="green",lty="dotted") +
+  geom_line(data=part1Data, aes(group=1,x=part1Data$Week,y=700*part1Data$X..Positive),size=1,col="black") +
+  scale_colour_manual(values=c("yellow","green","black"))+
+  theme(axis.text.x = element_text(angle = 75, hjust = 1))+
+  scale_x_discrete(breaks=part1Data$Week,labels = c("201740","201742","201744","201746","201748","201750","201752","201802","201804","201806",
+                              "201808","201810","201812","201814","201816","201818","201820"))+
+  scale_y_continuous(breaks = round(seq(2000, 18000, by = 1000),1))+
+  scale_y_continuous(sec.axis = sec_axis(~.*0.0014, name = "Percent Positive",breaks = round(seq(2, 30, by = 2),1)),expand=c(0,0))+
+ggtitle("Influenza Positive Tests Reported to CDC by U.S. Clinical Laboratories, \n National Summary, 2017-2018 Season")+
+  theme(panel.grid.major = element_line(color= NA),
+        panel.grid.minor = element_line(color= NA)) +
+  guides(col = guide_legend(ncol = 1)) + 
+  theme(legend.key = element_blank(), 
+        legend.position = "top", legend.title = element_blank(),
+        legend.box.just = "left")
+
+##########################################
+
+#+ scale_y_continuous("Number of Positive Specimen")
+#+ sec.axis = sec_axis(~ .*0.0014, name ="Percent Positive")
+```
 
 
 
