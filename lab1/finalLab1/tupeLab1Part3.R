@@ -17,7 +17,7 @@ library(ggmap)
 library(twitteR)
 setup_twitter_oauth("xxnT9Yq3j6YvATGT04E0C8ASH", "lVM3BFFTT8i1qjQhX9FM2CKdum6h8iVrCcZfqWntTk02oWm08M","57972043-A4xUZwhzLY9hCgwTRRYN2yytdRcTfayjQwELg8blm","NNivHGb0hEPjNCWwSogIUGSQ3SNPeLGnbL4gbyrxAhbE3")
 
-#############################################
+y#############################################
 #Fetching Data
 #############################################
 searchStr = 'flu'
